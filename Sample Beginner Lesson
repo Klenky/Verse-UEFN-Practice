@@ -1,0 +1,26 @@
+using { /Fortnite.com/Devices }
+using { /Verse.org/Simulation }
+
+# A Verse-authored creative device that can be placed in a level
+hello_world_device := class(creative_device):
+
+    var PlayerHealth : float = 100.00
+    PotionDamageAmount : float = 20.0
+    PotionHealAmount : float = 10.0
+    PlayerStatusText : string = "Player health now "
+    var EffectOnPlayerText : string = "damaged "
+
+    # Runs when the device is started in a running game
+    OnBegin<override>()<suspends>:void=
+        
+        #Damage
+        Print("Player Health : {PlayerHealth}")
+        set PlayerHealth = PlayerHealth - PotionDamageAmount
+        Print("The Player was {EffectOnPlayerText + ToString(PotionDamageAmount)}")
+        Print("{PlayerStatusText + ToString(PlayerHealth)}")
+
+        # Healing
+        set PlayerHealth = PlayerHealth + PotionHealAmount
+        set EffectOnPlayerText = "healed "
+        Print("The Player was {EffectOnPlayerText + ToString(PotionHealAmount)}")
+        Print("{PlayerStatusText + ToString(PlayerHealth)}")
